@@ -201,3 +201,148 @@ symphony new laboutiquefrancaise --webapp
     + **Phase 3 :** Création d'un formulaire de connexion
     + **Phase 4 :** Création d'un espace privé (membre)
 
+## Creation de l'entité User CLI
+
+```
+$ symfony console make:user
+
+ The name of the security user class (e.g. User) [User]:
+ >
+
+ Do you want to store user data in the database (via Doctrine)? (yes/no) [yes]:
+ > yes
+
+ Enter a property name that will be the unique "display" name for the user (e.g. email, username, uuid) [email]:
+ >
+
+ Will this app need to hash/check user passwords? Choose No if passwords are not needed or will be checked/hashed by some other system (e.g. a single sign-on server).
+
+ Does this app need to hash/check user passwords? (yes/no) [yes]:
+ >
+
+ created: src/Entity/User.php
+ created: src/Repository/UserRepository.php
+ updated: src/Entity/User.php
+ updated: config/packages/security.yaml
+
+           
+  Success! 
+           
+
+ Next Steps:
+   - Review your new App\Entity\User class.
+   - Use make:entity to add more fields to your User entity and then run make:migration.
+   - Create a way to authenticate! See https://symfony.com/doc/current/security.html
+```
+
+
+### **Creation De la base de données: laboutiquefrançaise**
+
+```
+symphony console doctrine:database:create
+
+ou
+
+php bin/console doctrine:database:create
+```
+
+### **Effectuer une mugration**
+
+```
+ $ symfony console make:migration 
+ created: migrations/Version20240206120100.php
+
+           
+  Success! 
+           
+
+ Review the new migration then run it with symfony.exe console doctrine:migrations:migrate
+ See https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html
+
+
+ $ symfony console doctrine:migration:migrate 
+
+ WARNING! You are about to execute a migration in database "laboutiquefrancaise" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]:
+ > yes
+
+[notice] Migrating up to DoctrineMigrations\Version20240206120100
+[notice] finished in 389.7ms, used 24M memory, 1 migrations executed, 2 sql queries
+                                                                                                                        
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20240206120100                                        
+                                                                                   
+```
+
+### Modifications ou ajout de champs dans une classe puis migrations et applications de cette migration.
+
+```
+ $ symfony console make:entity
+
+ Class name of the entity to create or update (e.g. FiercePopsicle):
+ > User
+
+ Your entity already exists! So let's add some new fields!
+
+ New property name (press <return> to stop adding fields):
+ > firstname
+
+ Field type (enter ? to see all types) [string]:
+ > string
+
+ Field length [255]:
+ >
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ >   
+
+ updated: src/Entity/User.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > lastname
+
+ Field type (enter ? to see all types) [string]:
+ >
+
+ Field length [255]:
+ >
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ >
+
+ updated: src/Entity/User.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ >
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with symfony.exe console make:migration
+
+$ symfony console make:migration
+ created: migrations/Version20240206125236.php
+
+           
+  Success! 
+           
+
+ Review the new migration then run it with symfony.exe console doctrine:migrations:migrate
+ See https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html
+
+$ symfony console doctrine:migrations:migrate 
+
+ WARNING! You are about to execute a migration in database "laboutiquefrancaise" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]:
+ >
+
+[notice] Migrating up to DoctrineMigrations\Version20240206125236
+[notice] finished in 153.8ms, used 24M memory, 1 migrations executed, 1 sql queries
+                                                                                                    
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20240206125236                     
+                                                                            
+```
+
+# Easy admin 4
+
+![Alt Text](images/image1.jpg)
+
